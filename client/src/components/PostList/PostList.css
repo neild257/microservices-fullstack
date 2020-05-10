@@ -1,0 +1,9 @@
+.PostListContainer {
+    padding: 8px;
+}
+
+.PostList {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

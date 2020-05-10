@@ -1,0 +1,10 @@
+.PostCreate {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.PostCreate .CustomCard {
+    width: 30%;
+    margin-bottom: 20px;
+}
