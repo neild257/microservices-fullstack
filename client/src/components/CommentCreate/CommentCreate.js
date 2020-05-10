@@ -10,6 +10,9 @@ const CommentCreate = (props) => {
         event.preventDefault();
 
         await axios.post(`http://localhost:5000/posts/${props.id}/comments`, { content });
+
+        // reseting the input of content to empty string
+        setContent('');
     } 
 
     return (

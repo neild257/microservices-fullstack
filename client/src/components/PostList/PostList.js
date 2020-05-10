@@ -7,16 +7,17 @@ import PostItem from '../PostItem/PostItem';
 const PostList = (props) => {
     const [posts, setPosts] = useState({});
 
-    const fetchPosts = async () => {
-        const res = await axois.get('http://localhost:4000/posts');
-
-        setPosts(res.data);
-    }
-
     /**
      * The Empty array will only run at the end.
      */
     useEffect(() => {
+        
+        const fetchPosts = async () => {
+            const res = await axois.get('http://localhost:4000/posts');
+    
+            setPosts(res.data);
+        }
+
         fetchPosts();
     }, []);
 
