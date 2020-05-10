@@ -2,6 +2,7 @@ const express = require('express');
 const { randomBytes } = require('crypto');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const axios = require('axios');
 
 const app = express();
 app.use(bodyParser.json());
@@ -23,7 +24,20 @@ app.post('/posts', async (req, res) => {
         id, title
     };
 
+    // adding the event on the event bus
+    await axios.post('http://localhost:4002/events', {
+        type: 'PostCreated',
+        payload: postState[id]
+    });
+    
     res.status(201).send(postState[id]);
+});
+
+app.post('/events', (req, res) => {
+    console.log(`Received Event in Post Service: ${req.body.type}`);
+
+    // just to acknowledge the event
+    res.send({});
 });
 
 app.listen(PORT, () => {

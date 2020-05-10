@@ -13,7 +13,7 @@ const PostList = (props) => {
     useEffect(() => {
         
         const fetchPosts = async () => {
-            const res = await axois.get('http://localhost:4000/posts');
+            const res = await axois.get('http://localhost:4005/posts');
     
             setPosts(res.data);
         }
@@ -34,6 +34,7 @@ const PostList = (props) => {
                                 key={index}
                                 title={post.title}
                                 id={post.id}
+                                comments={post.comments || []}
                             />
                         );
                     })

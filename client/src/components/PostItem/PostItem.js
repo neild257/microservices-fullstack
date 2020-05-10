@@ -9,7 +9,7 @@ const PostItem = (props) => {
         <div className="PostItem">
             <h4>{props.title}</h4>
             <div className="PostItemBody">
-                <CommentList id={props.id} />
+                <CommentList comments={props.comments} />
                 <CommentCreate id={props.id} />
             </div>
         </div>
