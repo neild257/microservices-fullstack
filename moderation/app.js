@@ -13,8 +13,6 @@ app.post('/events', async (req, res) => {
     if (type === 'CommentCreated') {
         const { id, content, postId } = payload;
         const moderationStatus = content.includes('orange') ? 'rejected' : 'approved';
-
-        console.log('Inside the CommentCreated Event in Moderation Service and payload is:', payload, moderationStatus);
         
         await axios.post('http://localhost:4002/events', {
             type: 'CommentModerated',

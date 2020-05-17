@@ -38,8 +38,6 @@ app.post('/posts/:id/comments', async (req, res) => {
 
     commentsByPostId[req.params.id] = currentComments;
 
-    console.log('Inside the CommentCreated Event in Comment Service and payload is:', commentsByPostId[req.params.id]);
-
     // sending the events to the events bus
     await axios.post('http://localhost:4002/events', {
         type: 'CommentCreated',
@@ -60,7 +58,6 @@ app.post('/events', async (req, res) => {
 
     if (type === 'CommentModerated') {
         const { moderationStatus, postId, id, content } = payload;
-        console.log('Inside Comment Moderated Event of Comments Service with Payload', payload);
         commentsByPostId[postId].find((comment) => comment.id === id).moderationStatus = moderationStatus;
 
         await axios.post('http://localhost:4002/events', {
