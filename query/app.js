@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const axios = require('axios');
 const cors = require('cors');
 
 const PORT = process.env.PORT || 4005;
@@ -15,9 +16,7 @@ app.get('/posts', (req, res) => {
     res.send(queryState);
 });
 
-app.post('/events', (req, res) => {
-    const { type, payload } = req.body;
-    
+const handleEvents = (type, payload) => {
     switch(type) {
         case 'PostCreated':
             const { id, title } = payload;
@@ -44,10 +43,23 @@ app.post('/events', (req, res) => {
         default:
             break;
     }
+};
+
+app.post('/events', (req, res) => {
+    const { type, payload } = req.body;
+    
+    handleEvents(type, payload);
 
     res.send({});
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`App has started listing on ${PORT}`);
+
+    // After the service comes online call the event bus for the missed events
+    const res = await axios.get('http://localhost:4002/events');
+
+    for (let event of res.data) {
+        handleEvents(event.type, event.payload);
+    }
 });
