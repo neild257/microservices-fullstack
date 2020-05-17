@@ -42,7 +42,7 @@ app.post('/events', (req, res) => {
             break;
         case 'CommentUpdated':
             console.log('The value of queryState before update', queryState[payload.postId]);
-            const comment = queryState[payload.postId].comments.find((comment) => comment.id = payload.id);
+            const comment = queryState[payload.postId].comments.find((comment) => comment.id === payload.id);
             console.log('Inside the CommentUpdated Event in Query Service and comment is:', comment, payload);
             comment.moderationStatus = payload.moderationStatus;
             comment.content = payload.content;
