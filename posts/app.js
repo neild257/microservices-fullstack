@@ -25,7 +25,7 @@ app.post('/posts', async (req, res) => {
     };
 
     // adding the event on the event bus
-    await axios.post('http://localhost:4002/events', {
+    await axios.post('http://event-bus-service:4002/events', {
         type: 'PostCreated',
         payload: postState[id]
     });
@@ -41,5 +41,5 @@ app.post('/events', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Application has started on ${PORT}`);
+    console.log(`Application has started on ${PORT} v3`);
 }); 
