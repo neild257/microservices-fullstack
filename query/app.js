@@ -57,7 +57,7 @@ app.listen(PORT, async () => {
     console.log(`App has started listing on ${PORT}`);
 
     // After the service comes online call the event bus for the missed events
-    const res = await axios.get('http://localhost:4002/events');
+    const res = await axios.get('http://event-bus-service:4002/events');
 
     for (let event of res.data) {
         handleEvents(event.type, event.payload);

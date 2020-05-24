@@ -14,7 +14,7 @@ app.post('/events', async (req, res) => {
         const { id, content, postId } = payload;
         const moderationStatus = content.includes('orange') ? 'rejected' : 'approved';
         
-        await axios.post('http://localhost:4002/events', {
+        await axios.post('http://event-bus-service:4002/events', {
             type: 'CommentModerated',
             payload: {
                 id, content, moderationStatus, postId

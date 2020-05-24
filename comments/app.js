@@ -39,7 +39,7 @@ app.post('/posts/:id/comments', async (req, res) => {
     commentsByPostId[req.params.id] = currentComments;
 
     // sending the events to the events bus
-    await axios.post('http://localhost:4002/events', {
+    await axios.post('http://event-bus-service:4002/events', {
         type: 'CommentCreated',
         payload: {
             id: commentId,
@@ -60,7 +60,7 @@ app.post('/events', async (req, res) => {
         const { moderationStatus, postId, id, content } = payload;
         commentsByPostId[postId].find((comment) => comment.id === id).moderationStatus = moderationStatus;
 
-        await axios.post('http://localhost:4002/events', {
+        await axios.post('http://event-bus-service:4002/events', {
             type: 'CommentUpdated',
             payload: {
                 id,
