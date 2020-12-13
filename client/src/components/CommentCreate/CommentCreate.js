@@ -9,7 +9,7 @@ const CommentCreate = (props) => {
     const onSubmit = async (event) => {
         event.preventDefault();
 
-        await axios.post(`http://localhost:4001/posts/${props.id}/comments`, { content });
+        await axios.post(`http://posts.com/posts/${props.id}/comments`, { content });
 
         // reseting the input of content to empty string
         setContent('');
