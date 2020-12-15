@@ -16,7 +16,7 @@ app.get('/posts', async (req, res) => {
     res.status(200).send(postState);
 });
 
-app.post('/posts', async (req, res) => {
+app.post('/posts/create', async (req, res) => {
     // generating random string
     const id = randomBytes(4).toString('hex');
     const { title } = req.body;
